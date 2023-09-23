@@ -12,7 +12,7 @@ A complete tutorial on how to build this image, and how to run the container is 
 Svnadmin web-interface used from [https://github.com/mfreiholz/iF.SVNAdmin](https://github.com/mfreiholz/iF.SVNAdmin) version: stable-1.6.2.zip
 
 
-# Running Commands
+## Running Commands
 To run the image, you can use the following command:
 ```
 docker run \
@@ -31,8 +31,8 @@ In first start will be inited automaticly all default folders/files/password - t
 
 so:
 
-- http://localhost/svn - with repositories
-- http://localhost/svnadmin - configuration (login: `admin` / password: `admin` **Don't foget change this** )
+- http://localhost:80/svn - with repositories
+- http://localhost:80/svnadmin - configuration (login: `admin` / password: `admin` **Don't foget change this** )
 
 
 
@@ -40,6 +40,20 @@ Check also that the custom protocol is working fine: go to your terminal and typ
 For further information on how to configure Subversion, please refer to the [official web page](https://subversion.apache.org/).
 
 
-## TODO:
+## Dev
 
-- fix to deny access `/svnadmin/data/`
+Rebuld docker image:
+
+```
+$ docker rmi sea5kg/svn-server
+$ docker build -t sea5kg/svn-server:latest .
+```
+
+Test run:
+
+If you get error `Error starting userland proxy: listen tcp4 0.0.0.0:80: bind: address already in use.`, so you can bind to another port:
+
+```
+$ docker run --rm --name svn-server -p 84:80 -e SVN_SERVER_REPOSITORIES_URL=/svn -v `pwd`/data:/data sea5kg/svn-server
+```
+*Contrainer will be removed after stop container*

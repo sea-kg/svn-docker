@@ -34,6 +34,9 @@ ENV SVN_SERVER_REPOSITORIES_URL=/svn
 # Add WebDav configuration
 ADD svn-server/etc/apache2/conf.d/dav_svn.conf /etc/apache2/conf.d/dav_svn.conf
 
+# Add svn admin configuration
+ADD svn-server/etc/apache2/conf.d/svnadmin.conf /etc/apache2/conf.d/svnadmin.conf
+
 # Set HOME in non /root folder
 # ENV HOME /home
 
